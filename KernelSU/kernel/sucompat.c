@@ -11,9 +11,15 @@
 #if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 11, 0)
 #include <linux/sched/task_stack.h>
 #ifdef CONFIG_KSU_SUSFS_SUS_SU
+#ifndef KSU_SUSFS_SYMBOLS_PROVIDED
+#include <linux/susfs_def.h>
+bool susfs_is_sus_su_hooks_enabled = false;
+int susfs_sus_su_working_mode = 0; /* SUS_SU_DISABLED */
+#else /* KSU_SUSFS_SYMBOLS_PROVIDED */
 #include <linux/susfs_def.h>
 extern bool susfs_is_sus_su_hooks_enabled;
 extern int susfs_sus_su_working_mode;
+#endif /* KSU_SUSFS_SYMBOLS_PROVIDED */
 #endif
 #else
 #include <linux/sched.h>
