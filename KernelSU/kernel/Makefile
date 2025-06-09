@@ -135,6 +135,7 @@ ifeq ($(shell test -e $(srctree)/fs/susfs.c; echo $$?),0)
 $(eval SUSFS_VERSION=$(shell cat $(srctree)/include/linux/susfs.h | grep -E '^#define SUSFS_VERSION' | cut -d' ' -f3 | sed 's/"//g'))
 $(info )
 $(info -- SUSFS_VERSION: $(SUSFS_VERSION))
+ccflags-$(CONFIG_KSU_SUSFS) += -DKSU_SUSFS_SYMBOLS_PROVIDED
 else
 $(info -- You have not integrate susfs in your kernel.)
 $(info -- Read: https://gitlab.com/simonpunk/susfs4ksu)
